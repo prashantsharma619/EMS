@@ -9,7 +9,7 @@ from django.conf import settings
 from .forms import PasswordResetRequestForm, PasswordResetConfirmForm
 from .models import PasswordResetToken
 
-# Create your views here.
+# Create your views here
 def login_view(request):
     if request.method == "POST":
         email = request.POST.get('email')
