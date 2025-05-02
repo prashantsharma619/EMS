@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="keywords"
+        content="ERP, school ERP, college ERP, student management, academic records, attendance tracking, timetable, examination, fees management, library management, parent portal">
+
+    <title>ScholarBytes</title>
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- google fonts end -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="icon" href="/scholarimg/favicon.png" type="image/png" sizes="16x16" />
+    <link type="text/css" href="{% static 'assets/css/style.css'%}" rel="stylesheet" />
+    <link type="text/css" rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css'%}" />
+    <link type="text/css" rel="stylesheet" href="{% static 'assets/css/simple-line-icons.css'%}" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap" rel="stylesheet" />
+    <link rel='stylesheet' id='crellyslider.min-css' href="{% static 'assets/css/crellyslider.min.css'%}" media='all' />
+    <script src="{% static 'assets/js/jquery4a5f.js'%}"></script>
+    <script src="{% static 'assets/js/jquery.crellyslider.min.js'%}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <style>
+        body {
+            font-family: "Inter", sans-serif;
+        }
+
+        .admin-logo img {
+            height: 100px;
+            margin: 0 0 30px;
+        }
+
+        .register-form h3 {
+            font-weight: 900;
+            font-size: 35px;
+            margin: 0;
+        }
+
+        .register-form p {
+            color: #a9a9a9;
+            font-size: 18px;
+        }
+
+        .register-form form {
+            margin: 20px 0 0;
+        }
+
+        .register-form .form-group label {
+            color: #333;
+            font-weight: 400;
+        }
+
+        .register-form .form-group input {
+            border-color: #eee;
+            padding: 12px 20px;
+        }
+
+        .register-form .form-group {
+            margin-top: 20px;
+        }
+
+        .register-form .form-group .btn {
+            width: 100%;
+            padding: 12px 0;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body style="background: linear-gradient(264deg, #ddeef7, #a8c9d8);">
+    <div class="p-0 mt-4 mt-md-0 p-md-5 mh-100">
+        <div class="container">
+            <div class="row g-0 bg-white rounded overflow-hidden align-items-center mx-auto shadow-lg">
+                <div class="col-xl-5 d-none d-md-block d-lg-block">
+                    <img src="{% static 'assets/images/pexels-pixabay-290275.jpg' %}" alt="Dummy Image Login Page"
+                        style="width: 100%; height: 100%; object-fit: cover" />
+                </div>
+                <div class="col-xl-7 d-flex p-3 p-md-4 bg-white">
+                    <div class="register-form w-100 p-4">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            {% include "alerts.html" %}
+                        </div>
+                        <h3>Welcome !</h3>
+                        <p>Please login:</p>
+
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" id="login-type" name="login-type" value="" />
+                            <input type="hidden" id="device_id" name="device_id" value="" />
+                            <input type="hidden" id="device_type" name="device_type" value="" />
+
+                            <!-- Email field (show for all login types) -->
+                            <div class="form-group">
+                                <label htmlFor="email" class="form-label">Email</label>
+                                <input name='email' type="email" class="form-control" id="email"
+                                    placeholder="Enter your email here..." required />
+                            </div>
+
+                            <!-- Password field (show for all login types) -->
+                            <div class="form-group">
+                                <label class="form-label">Password</label>
+                                <div class="input-group auth-pass-inputgroup">
+                                    <input name='password' type="password" class="form-control" placeholder="Enter password"
+                                        aria-label="Password" aria-describedby="password-addon" required />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <button class="btn btn-primary shadow" type="submit">Log In</button>
+                            </div>
+                            
+                            <div class="text-center mt-3">
+                                <a href="{% url 'accounts:password_reset' %}" class="text-decoration-none" style="color: #0d6efd;">Forgot Password?</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    // Get the device type based on user agent
+    function getDeviceType() {
+        const userAgent = navigator.userAgent.toLowerCase();
+        if (/mobile|android|touch|webos|hpwos/i.test(userAgent)) {
+            return 'mobile';
+        } else if (/tablet|ipad/i.test(userAgent)) {
+            return 'tablet';
+        } else {
+            return 'desktop';
+        }
+    }
+
+    // Generate or retrieve a unique device ID using localStorage
+    function getDeviceId() {
+        let deviceId = localStorage.getItem('device-id');
+        if (!deviceId) {
+            deviceId = Math.random().toString(36).substr(2, 9);  // Generate a random ID
+            localStorage.setItem('device-id', deviceId);
+        }
+        return deviceId;
+    }
+
+    // Attach device type and device ID to the form on load
+    document.addEventListener("DOMContentLoaded", function () {
+        const deviceType = getDeviceType();
+        const deviceId = getDeviceId();
+    
+        document.getElementById('device_type').value = deviceType;
+        document.getElementById('device_id').value = deviceId;
+    
+        // Add debug logging
+        console.log('Device Type:', deviceType);
+        console.log('Device ID:', deviceId);
+    });
+    // Modify the form fields based on the selected login type
+    const urlParams = new URLSearchParams(window.location.search);
+    const loginType = urlParams.get('loginType');
+
+    switch (loginType) {
+        case 'institute-login':
+            document.getElementById('institute-id-field').style.display = 'block';
+            document.getElementById('teacher-institute-field').style.display = 'none';
+            break;
+        case 'student-login':
+            document.getElementById('institute-id-field').style.display = 'none';
+            document.getElementById('teacher-institute-field').style.display = 'none';
+            break;
+        case 'teacher-login':
+            document.getElementById('institute-id-field').style.display = 'none';
+            document.getElementById('teacher-institute-field').style.display = 'block';
+            break;
+    }
+</script>
+
+</html>

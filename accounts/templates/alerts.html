@@ -1,0 +1,60 @@
+{% if messages %}
+    {% for message in messages %}
+        {% with message.tags as tags %}
+            {% if 'success' in tags %}
+                {% with alert_class="alert-success" %}
+                    <div class="alert {{ alert_class }} d-flex justify-content-between align-items-center fade show" role="alert">
+                        <span>{{ message }} <small>(<span class="countdown" data-time="5">5</span>s)</small></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endwith %}
+            {% elif 'error' in tags or 'danger' in tags %}
+                {% with alert_class="alert-danger" %}
+                    <div class="alert {{ alert_class }} d-flex justify-content-between align-items-center fade show" role="alert">
+                        <span>{{ message }} <small>(<span class="countdown" data-time="5">5</span>s)</small></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endwith %}
+            {% elif 'warning' in tags %}
+                {% with alert_class="alert-warning" %}
+                    <div class="alert {{ alert_class }} d-flex justify-content-between align-items-center fade show" role="alert">
+                        <span>{{ message }} <small>(<span class="countdown" data-time="5">5</span>s)</small></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endwith %}
+            {% elif 'info' in tags %}
+                {% with alert_class="alert-info" %}
+                    <div class="alert {{ alert_class }} d-flex justify-content-between align-items-center fade show" role="alert">
+                        <span>{{ message }} <small>(<span class="countdown" data-time="5">5</span>s)</small></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endwith %}
+            {% else %}
+                {% with alert_class="alert-secondary" %}
+                    <div class="alert {{ alert_class }} d-flex justify-content-between align-items-center fade show" role="alert">
+                        <span>{{ message }} <small>(<span class="countdown" data-time="5">5</span>s)</small></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endwith %}
+            {% endif %}
+        {% endwith %}
+    {% endfor %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let alerts = document.querySelectorAll('.alert');
+            alerts.forEach((alert) => {
+                let countdownElement = alert.querySelector('.countdown');
+                let timeLeft = parseInt(countdownElement.dataset.time);
+                let interval = setInterval(() => {
+                    timeLeft--;
+                    countdownElement.textContent = timeLeft;
+                    if (timeLeft <= 0) {
+                        clearInterval(interval);
+                        let bsAlert = new bootstrap.Alert(alert);
+                        bsAlert.close();
+                    }
+                }, 1000);
+            });
+        });
+    </script>
+{% endif %}
